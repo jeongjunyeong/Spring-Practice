@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<form th:action="@{regOk}" method="GET">
+    username : <input type="text" name="username" value="GET"/>
+    <input type="submit" value="GET요청"/>
+</form>
+<hr>
+
+<form th:action="@{regOk}" method="post">
+    username : <input type="text" name="username" value="post"/>
+    <input type="submit" value="post요청"/>
+</form>
+
+<hr>
+<!-- -------------------------------------------------------------------------------------- -->
+<form th:action="@{regOk2}" method="GET">
+    username : <input type="text" name="username" value="GET-regOk2"/>
+    <input type="submit" value="GET요청"/>
+</form>
+<hr>
+
+<form th:action="@{regOk2}" method="post">
+    username : <input type="text" name="username" value="post-regOk2"/>
+    <input type="submit" value="post요청"/>
+</form>
+
+<hr>
+</html>

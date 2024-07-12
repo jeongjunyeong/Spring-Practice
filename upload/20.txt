@@ -1,0 +1,31 @@
+/*******************************
+ * 단어의 앞글자로만 만들어진 문자열 생성
+ */
+
+const input = [
+    "The community at Code States might be the biggest asset", // -> TcaCSmbtba
+    "i am a PROGRAMMER",     // -> iaaP
+    "THAT ELEPHANT IS BIG",  // -> TEIB
+]
+
+function makeString(str){
+
+    // TODO
+    // 리턴값: string
+    const words = str.split(/\s+/);
+    // 공백 단위로 쪼갬
+
+    let result = ''; 
+    // 결과를 저장할 변수
+
+    words.forEach(e => {
+        
+        result += e.charAt(0);
+        // 각 단어의 첫 글자를 추출하여 결과 문자열에 추가
+    });
+
+    return result;
+    
+}
+
+input.forEach(e => console.log(makeString(e)));
