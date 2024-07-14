@@ -1,66 +1,74 @@
 package com.lec.spring.service;
 
-import com.lec.spring.domain.Post;
-import com.lec.spring.dto.PostDto;
-import com.lec.spring.repository.PostRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import com.lec.spring.domain.Post;
+import com.lec.spring.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
 
-    private final PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
-    // a먼저 받아준다.
 
     @Override
-    public Post write(PostDto postDto) {
-        postDto.setRegDate(LocalDateTime.now());
-        return postRepository.save(postDto.toEntity());
+    public int write(Post post) {
+        postRepository.save(post);   // INSERT
+        return 1;
     }
 
     @Override
-    @Transactional
     public Post detail(Long id) {
-        Optional<Post> optionalPost = postRepository.findById(id);
-        optionalPost.ifPresent(Post::increaseViewCnt);
-        return optionalPost.get();
+        Post post = postRepository.findById(id).orElse(null);
+        if(post != null){
+            post.setViewCnt(post.getViewCnt() + 1);
+            postRepository.saveAndFlush(post);
+        }
+
+        return post;
     }
 
     @Override
     public List<Post> list() {
-        return postRepository.findAll();
+        return postRepository.findAll(Sort.by(Sort.Order.desc("id")));
     }
 
     @Override
     public Post selectById(Long id) {
-        postRepository.findById(id);
-        return postRepository.findById(id).get();
+        return postRepository.findById(id).orElse(null);
     }
 
     @Override
     public int update(Post post) {
-        postRepository.save(post);
+        Post data = postRepository.findById(post.getId()).orElse(null);
+        if(data == null) return 0;
+
+        data.setSubject(post.getSubject());
+        data.setContent(post.getContent());
+
+        postRepository.save(data);  // SELECT + UPDATE
         return 1;
     }
 
     @Override
     public int deleteById(Long id) {
-        postRepository.deleteById(id);  // selete를 하고 delete를 한다.
+        boolean exists = postRepository.existsById(id);
+        if(!exists) return 0;
+
+        postRepository.deleteById(id);   // SELECT + DELETE
         return 1;
     }
-
-    // 여기부분 다시
-//    @Override
-//    public Long viewCnt {
-//        postRepository.count();
-//    }
-
 } // end Service
+
+
+
+
+
+
+
+

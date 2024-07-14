@@ -1,20 +1,18 @@
 package com.lec.spring.service;
 
-
 // Service layer
 // - Business logic, Transaction 담당
 // - Controller 와 Data 레이어의 분리
 
-
 import com.lec.spring.domain.Post;
-import com.lec.spring.dto.PostDto;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface BoardService {
+
     // 글 작성
-    Post write(PostDto postDto);
+    int write(Post post);
 
     // 특정 id 의 글 조회
     // 트랜잭션 처리
@@ -23,9 +21,8 @@ public interface BoardService {
     @Transactional
     Post detail(Long id);
 
-
+    // 글목록
     List<Post> list();
-
 
     // 특정 id 의 글 읽어오기 (SELECT)
     // 조회수 증가 없음
@@ -36,5 +33,17 @@ public interface BoardService {
 
     // 특정 id 글 삭제하기 (DELETE)
     int deleteById(Long id);
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
