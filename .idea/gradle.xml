@@ -60,6 +60,22 @@
           </set>
         </option>
       </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Bt62_JPA_Board" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Bt62_JPA_Board" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Bt63_JPA_Board" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Bt63_JPA_Board" />
+          </set>
+        </option>
+      </GradleProjectSettings>
     </option>
   </component>
 </project>
