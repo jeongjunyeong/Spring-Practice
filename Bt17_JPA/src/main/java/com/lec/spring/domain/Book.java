@@ -85,6 +85,13 @@ public class Book extends BaseEntity {
 //        this.updatedAt = LocalDateTime.now();
 //    }
 
+    // ---------------------------------------------------------------------------
+    // Converer 예제
+    private int status;  // 판매상태 (정수값으로 표현)
+
+    public boolean isDisplayed(){
+        return status == 200;
+    }
 }
 
 

@@ -11,8 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 @SpringBootTest
 class BookRepositoryTest {
@@ -158,5 +157,43 @@ class BookRepositoryTest {
         bookRepository.findBookNameAndCategory4(PageRequest.of(0,1)).forEach(b -> {
             System.out.println(b.getName() + " : " + b.getCategory());
         });
+    }
+
+    @Test
+    void nativeQueryTest1(){
+        System.out.println("🐹".repeat(30));
+        bookRepository.findAll().forEach(System.out::println);
+        System.out.println("🐹".repeat(30));
+        bookRepository.findAllCustom1().forEach(System.out::println);
+    }
+
+    @Test
+    void nativeQueryTest2(){
+        List<Book> books = bookRepository.findAll();
+
+        for(Book book : books){
+            book.setCategory("IT전문서");
+        }
+        System.out.println("💀".repeat(30));
+        bookRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void nativeQueryTest3(){
+        System.out.println("affected rows:" + bookRepository.updateCategories());
+        System.out.println("😒".repeat(30));
+        System.out.println(bookRepository.findAllCustom1());
+    }
+
+    @Test
+    void nativeQueryTest4(){
+        System.out.println(bookRepository.showTables());
+    }
+
+    //------------------------------------------------------------------
+    // Cnverter
+    @Test
+    void converterTest1(){
+        bookRepository.findAll().forEach(System.out::println);
     }
 }
