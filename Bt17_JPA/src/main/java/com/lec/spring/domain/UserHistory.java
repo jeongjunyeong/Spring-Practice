@@ -41,4 +41,11 @@ public class UserHistory extends BaseEntity {
 //    private LocalDateTime createdAt;
 //    @LastModifiedDate
 //    private LocalDateTime updatedAt;
+
+    private String city;
+    private String district;
+    private String detail;
+    private String zipCode;
+
+
 }

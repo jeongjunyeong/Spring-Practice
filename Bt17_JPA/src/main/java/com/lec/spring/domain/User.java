@@ -133,6 +133,13 @@ public class User extends BaseEntity {
 //    }
 
 
+    // EMbedded 예제
+    // Embed 없이 주소 다루기
+    private String city;
+    private String district;
+    private String detail;
+    private String zipCode;
+
 
 
 

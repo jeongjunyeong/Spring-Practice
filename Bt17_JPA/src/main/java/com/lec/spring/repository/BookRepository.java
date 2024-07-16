@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
     // 다음과 같은 쿼리 메소드를 만들어 보자
@@ -79,6 +80,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     // native query 로 JPA 에 없는 쿼리 하기
     @Query(value = "show tables", nativeQuery = true)
     List<String> showTables();
+
+    // Converter
+    // 실제 변환되어 저장되는 status 값 확인을 위한 native query 생성
+    // 가장 마지막에 저장된 book 정보만 읽어오기
+    @Query(value = "select * from book order by id desc limit 1", nativeQuery = true)
+    Map<String, Object> findRowRecord();
+
 
 
 }

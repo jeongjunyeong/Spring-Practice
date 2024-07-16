@@ -1,6 +1,8 @@
 package com.lec.spring.domain;
 
+import com.lec.spring.domain.converter.BookStatusConverter;
 import com.lec.spring.listener.Auditable;
+import com.lec.spring.repository.dto.BookStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -87,11 +89,15 @@ public class Book extends BaseEntity {
 
     // ---------------------------------------------------------------------------
     // Converer 예제
-    private int status;  // 판매상태 (정수값으로 표현)
+//    private int status;  // 판매상태 (정수값으로 표현)
+//
+//    public boolean isDisplayed(){
+//        return status == 200;
+//    }
+    // 엔티티가 아닌 BookStatus 타입으로 선언!
+    @Convert(converter = BookStatusConverter.class)  // 어떠한 Converter 를 적용할지 명시
+    private BookStatus status;
 
-    public boolean isDisplayed(){
-        return status == 200;
-    }
 }
 
 
