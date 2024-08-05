@@ -40,13 +40,13 @@ public class JWTUtil {
     // JWT 생성
     // Payload 에 저장될 정보
     // - id, username, role, 생성일, 만료일
-    public Integer getId(String token){
+    public Long getId(String token){
         return Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
                 .getPayload()
-                .get("id", Integer.class);
+                .get("id", Long.class);
     }
 
     public String getUsername(String token) {  // username 확인
@@ -78,6 +78,7 @@ public class JWTUtil {
                 .getExpiration()
                 .before(new Date());
     }
+
 
 
 }
